@@ -1,16 +1,24 @@
+
+// ui + data + logic = app
+
 import 'package:flutter/material.dart';
 
 class HomeProvider extends ChangeNotifier
 {
-  int counter = 0;
+  List l1 = []; // attribute
 
-  void increment()
+  // method(class) - function  = to create functionality - feature
+  void addToList()
   {
-    counter++;
+    l1.add("Avesh");
     notifyListeners();
   }
 
-}
+  void removerFromList(int index)
+  {
+    l1.removeAt(index);
+    notifyListeners();
+  }
 
-// state update --> update state ---> ui
-// logic ------ ui
+
+}
