@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_11am/provider/counter_provider.dart';
 import 'package:provider_11am/provider/home_provider.dart';
 import 'package:provider_11am/provider/theme_provider.dart';
+import 'package:provider_11am/views/counter_page.dart';
 import 'package:provider_11am/views/home_page.dart';
 
 void main()
@@ -18,12 +20,13 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => HomeProvider(),),
         ChangeNotifierProvider(create: (context) => ThemeProvider(),),
+        ChangeNotifierProvider(create: (context) => CounterProvider(),),
       ],
       builder: (context, child) => MaterialApp(
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: Provider.of<ThemeProvider>(context).isDark?ThemeMode.dark:ThemeMode.light,
-        home: const HomePage(),
+        home: const CounterPage(),
       ),
     );
   }
@@ -46,3 +49,15 @@ class MyApp extends StatelessWidget {
 // DELETE
 // DISPLAY IN PAGE
 
+// logic(ChangeNotifier-built in: notyfylistner()) --->  provider  ---> ui
+//
+
+// core ---> dark/light : dark, internet : local storage
+
+// important ---> dark.light : shared_preferences
+// used to store small amount of data in local storage(device).
+// bool - true,false
+// String - "message"
+// double -
+// List<String> :
+// Flutter : ios,android : device
