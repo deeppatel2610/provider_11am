@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_11am/provider/HideProvider.dart';
 import 'package:provider_11am/provider/counter_provider.dart';
 import 'package:provider_11am/provider/home_provider.dart';
 import 'package:provider_11am/provider/theme_provider.dart';
+import 'package:provider_11am/provider/todo_provider.dart';
 import 'package:provider_11am/views/counter_page.dart';
 import 'package:provider_11am/views/home_page.dart';
+import 'package:provider_11am/views/todo_app.dart';
+import 'package:provider_11am/views/urll_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main()
-{
-  runApp(MyApp());
+bool currentTheme = false;
+Future<void> main()
+async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  currentTheme = sharedPreferences.getBool('theme') ?? false;
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,14 +28,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => HomeProvider(),),
-        ChangeNotifierProvider(create: (context) => ThemeProvider(),),
+        ChangeNotifierProvider(create: (context) => ThemeProvider(currentTheme),),
         ChangeNotifierProvider(create: (context) => CounterProvider(),),
+        ChangeNotifierProvider(create: (context) => TodoProvider(),),
+        ChangeNotifierProvider(create: (context) => HideProvider(),),
       ],
       builder: (context, child) => MaterialApp(
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: Provider.of<ThemeProvider>(context).isDark?ThemeMode.dark:ThemeMode.light,
-        home: const CounterPage(),
+        home: const UrlScreen(),
       ),
     );
   }
@@ -61,3 +72,10 @@ class MyApp extends StatelessWidget {
 // double -
 // List<String> :
 // Flutter : ios,android : device
+
+// local auth ---> auth - identity check - login-
+// shared preference
+// pin -
+
+// Gallery - hide gallery
+// audio - gallery
