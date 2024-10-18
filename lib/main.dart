@@ -5,8 +5,10 @@ import 'package:provider_11am/provider/counter_provider.dart';
 import 'package:provider_11am/provider/home_provider.dart';
 import 'package:provider_11am/provider/theme_provider.dart';
 import 'package:provider_11am/provider/todo_provider.dart';
+import 'package:provider_11am/utils/themes/app_themes.dart';
 import 'package:provider_11am/views/counter_page.dart';
 import 'package:provider_11am/views/home_page.dart';
+import 'package:provider_11am/views/theme_view.dart';
 import 'package:provider_11am/views/todo_app.dart';
 import 'package:provider_11am/views/urll_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,10 +36,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HideProvider(),),
       ],
       builder: (context, child) => MaterialApp(
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
+        // theme: AppThemes.lightTheme,
+        // darkTheme: AppThemes.darkTheme,
         themeMode: Provider.of<ThemeProvider>(context).isDark?ThemeMode.dark:ThemeMode.light,
-        home: const UrlScreen(),
+        home: const ThemeView(),
       ),
     );
   }
@@ -79,3 +81,6 @@ class MyApp extends StatelessWidget {
 
 // Gallery - hide gallery
 // audio - gallery
+
+
+// Theme -
